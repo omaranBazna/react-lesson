@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 
-const CardEl = ({ name, description,price, isAvailable }) => {
+const CardEl = ({ setOrders,id, name, description,price, isAvailable }) => {
   return (
     <React.Fragment>
       <CardContent>
@@ -26,10 +26,20 @@ const CardEl = ({ name, description,price, isAvailable }) => {
         <Typography color="#e65100" variant="h6"  >
           {price}
         </Typography>
-        
-        
+      
 
-        <Button color="warning" variant="contained" size="small">
+        <Button onClick={()=>{
+           ///what will happen when we click the button
+           setOrders((old_orders)=>{
+              if(old_orders.find(item=>item==id))   ///order already placed
+              {
+                return old_orders
+              }else{
+                return [...old_orders,id]
+              }
+           })
+
+        }}  color="warning" variant="contained" size="small">
         Add
         </Button>
       </CardActions>
@@ -37,12 +47,14 @@ const CardEl = ({ name, description,price, isAvailable }) => {
   );
 };
 
-export default function CardComp({ name, description, price, isAvailable }) {
+
+
+export default function CardComp({setOrders,id, name, description, price, isAvailable }) {
   return (
     <Box sx={{ minWidth: 275, width: 200 ,margin:4 }}>
       <Card variant="outlined">
-        {" "}
-        <CardEl name={name} description={description} price={price}  isAvailable={ isAvailable}   />{" "}
+        
+        <CardEl id={id} setOrders={setOrders} name={name} description={description} price={price}  isAvailable={ isAvailable}   />{" "}
       </Card>
     </Box>
   );

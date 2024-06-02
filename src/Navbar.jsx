@@ -63,7 +63,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 
-function Navbar() {
+function Navbar({orders}) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
@@ -170,7 +170,7 @@ function Navbar() {
 
           <Box sx={{ flexGrow: 0 ,display:"flex"}}>
             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={5} color="error">
+              <Badge badgeContent={orders.length} color="error">
                 <ShoppingCartSharpIcon />
               </Badge>
             </IconButton>
