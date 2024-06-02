@@ -63,8 +63,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 
-function Navbar({orders}) {
+function Navbar({cards,orders,setOrders}) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -75,6 +76,13 @@ function Navbar({orders}) {
     setAnchorElNav(null);
   };
 
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+  
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
  
 
   return (
@@ -169,11 +177,46 @@ function Navbar({orders}) {
           </Box>
 
           <Box sx={{ flexGrow: 0 ,display:"flex"}}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+            <IconButton onClick={handleOpenUserMenu} size="large" aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={orders.length} color="error">
                 <ShoppingCartSharpIcon />
               </Badge>
             </IconButton>
+
+            <Menu
+              sx={{ mt: '45px' }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              {orders.map((order) => {
+                console.log(order) ///id of the element
+                const card=cards.find(item=>item.id==order)
+                console.log(card)
+               return <MenuItem key={order} onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center"> {card.name} - {card.price} <Button onClick={()=>{
+                    setOrders((old_orders)=>{
+                      //[1,2,3,5]   ///5
+                      return old_orders.filter(item=>item !=order)
+                    })
+                  }}> Delete</Button></Typography>
+                </MenuItem>
+              
+            })}
+            </Menu>
+
+
+
             <Search>
               <SearchIconWrapper>
                 <SearchIcon />

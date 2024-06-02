@@ -27,7 +27,7 @@ export default function App() {
 
   return (
     <main>
-      <Navbar orders={orders}  />  
+      <Navbar cards={cards} orders={orders} setOrders={setOrders}  />  
      <TextField  size="small" id="outlined-basic" label="Search" variant="outlined"  value={searchQ} placeholder="Search for item" onChange={(e)=>{
       
         setSearchQ(e.target.value)
