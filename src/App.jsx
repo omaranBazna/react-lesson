@@ -41,7 +41,7 @@ export default function App() {
        if(!card.name.includes(searchQ) && !card.description.includes(searchQ)) return <></>
       
       
-       return <Card setOrders={setOrders} id={card.id} name={card.name} description={card.description} price={card.price} isAvailable={card.isAvailable=="true"}   />
+       return <Card setOrders={setOrders} orders={orders} id={card.id} name={card.name} description={card.description} price={card.price} isAvailable={card.isAvailable=="true"}   />
       })}
 
       {searchQ==""&&<Button color="info" variant="outlined" size="small"  onClick={()=>{

@@ -6,13 +6,36 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+///react code  => printing the card
+//how the react code can decicde if the item is in cart or not?!
 
-const CardEl = ({ setOrders,id, name, description,price, isAvailable }) => {
+///if item in cart then (print (in cart)) else print available
+
+///is the cart in App.jsx or in Navbar.jsx or in Card.jsx? shopping cart
+
+
+
+export default function CardComp({setOrders,orders,id, name, description, price, isAvailable }) {
+
+  let isInCart = (orders.find(item=>item==id) != undefined)
+  let label,color
+  if(!isAvailable){
+    label="Sold out"
+    color="orange"
+  }else if(isInCart){
+    label="In-Cart"
+    color="red"
+  }else{
+    label="Available"
+    color="green"
+  }
   return (
-    <React.Fragment>
+    <Box sx={{ minWidth: 275, width: 200 ,margin:4 }}>
+      <Card variant="outlined">
+      <React.Fragment>
       <CardContent>
         <Typography sx={{ fontSize: 14 ,display:"flex",alignItems:"center"}} color="text.secondary" gutterBottom>
-          { isAvailable?"Available":"Sold out"} < FiberManualRecordIcon style={{ color: isAvailable?"green":"orange" ,height:20,width:20 }} />
+          { label} < FiberManualRecordIcon style={{ color: color ,height:20,width:20 }} />
         </Typography>
         <Typography variant="h5" component="div">
           {name}
@@ -28,7 +51,7 @@ const CardEl = ({ setOrders,id, name, description,price, isAvailable }) => {
         </Typography>
       
 
-        <Button onClick={()=>{
+        {isAvailable && !isInCart && <Button onClick={()=>{
            ///what will happen when we click the button
            setOrders((old_orders)=>{
               if(old_orders.find(item=>item==id))   ///order already placed
@@ -41,20 +64,23 @@ const CardEl = ({ setOrders,id, name, description,price, isAvailable }) => {
 
         }}  color="warning" variant="contained" size="small">
         Add
-        </Button>
+        </Button>}
+
+       
+        {isAvailable && isInCart && <Button onClick={()=>{
+           ///what will happen when we click the button
+           setOrders((old_orders)=>{
+              return old_orders.filter(item=>item!=id)
+           })
+
+        }}  color="info" variant="contained" size="small">
+        Remove from cart
+        </Button>}
+
+
       </CardActions>
     </React.Fragment>
-  );
-};
-
-
-
-export default function CardComp({setOrders,id, name, description, price, isAvailable }) {
-  return (
-    <Box sx={{ minWidth: 275, width: 200 ,margin:4 }}>
-      <Card variant="outlined">
-        
-        <CardEl id={id} setOrders={setOrders} name={name} description={description} price={price}  isAvailable={ isAvailable}   />{" "}
+       
       </Card>
     </Box>
   );
