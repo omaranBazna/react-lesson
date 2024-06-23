@@ -11,28 +11,32 @@ const marks = [
     label: '$0 free',
   },
   {
-    value: 20,
-    label: '$20',
+    value: 500,
+    label: '$500',
   },
   {
-    value: 37,
-    label: '$100',
+    value: 2000,
+    label: '$2000',
   },
   {
-    value: 100,
-    label: '$1000+',
+    value:5000,
+    label:"$5000"
+  },
+  {
+    value: 10000,
+    label: '$10000+',
   },
 ];
 
 
 
-const minDistance = 10;
+const minDistance = 1000;
 
-export default function PricesSlide() {
+export default function PricesSlide({pricesRange,setPricesRange}) {
   
   
 
-  const [value2, setValue2] = React.useState([20, 37]);
+ 
 
   const handleChange2 = (event, newValue, activeThumb) => {
     if (!Array.isArray(newValue)) {
@@ -45,11 +49,13 @@ export default function PricesSlide() {
         setValue2([clamped, clamped + minDistance]);
       } else {
         const clamped = Math.max(newValue[1], minDistance);
-        setValue2([clamped - minDistance, clamped]);
+        setPricesRange([clamped - minDistance, clamped]);
       }
     } else {
-      setValue2(newValue);
+      setPricesRange(newValue);
+      
     }
+
   };
 
   return (
@@ -57,14 +63,17 @@ export default function PricesSlide() {
      
       <Slider
         getAriaLabel={() => 'Minimum distance shift'}
-        value={value2}
+        value={pricesRange}
         onChange={handleChange2}
         valueLabelDisplay="auto"
         getAriaValueText={valuetext}
         disableSwap
         step={10}
-        marks={marks}
+        max={10000}
+        
       />
+      <div>Min price: ${pricesRange[0]}</div>
+      <div>Max price: ${pricesRange[1]}</div>
     </Box>
   );
 }

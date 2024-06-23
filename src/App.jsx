@@ -11,10 +11,11 @@ export default function App() {
   const [searchQ,setSearchQ]=useState(""); /// input change
   const [cards,setCards] = useState([]) ///loading API
   const [orders,setOrders] = useState([])
- 
+  const [pricesRange, setPricesRange] = useState([500,2000]);
 
  
-
+/*[200,1000] */
+///card {price:100}
 
 
   useEffect(()=>{
@@ -33,10 +34,15 @@ export default function App() {
         setSearchQ(e.target.value)
        
      }}/>
- <PricesSlide/>
+ <PricesSlide pricesRange={pricesRange} setPricesRange={setPricesRange}/>
        
       
-      {cards.map((card,index)=>{ {/* Can not read map of "undefined" */}
+      {cards.filter(card=>{
+        
+        let price=Number(card.price.substring(1))
+ 
+        return price>=pricesRange[0] && price<=pricesRange[1]
+      }).map((card,index)=>{ {/* Can not read map of "undefined" */}
       if(index>=upperBound && searchQ=="") return<></>
        if(!card.name.includes(searchQ) && !card.description.includes(searchQ)) return <></>
       
