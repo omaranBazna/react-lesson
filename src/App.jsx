@@ -2,17 +2,22 @@ import "./App.css";
 import Card from "./CardComp.jsx";
 import {useState,useEffect} from "react"
 import Button from "@mui/material/Button";
+import Navbar from "./Navbar.jsx"
+import SearchFilter from "./SearchFilter";
+import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import PricesSlide from "./PricesSlide.jsx"
-import Navbar from "./Navbar.jsx"
 export default function App() {
 
   const [upperBound,setUpperBound]=useState(4); //buttons clicks
   const [searchQ,setSearchQ]=useState(""); /// input change
+
   const [cards,setCards] = useState([]) ///loading API
   const [orders,setOrders] = useState([])
   const [pricesRange, setPricesRange] = useState([500,2000]);
-
+  const [pricesRange2, setPricesRange2] = useState([500,2000]);
+ 
+  
  
 /*[200,1000] */
 ///card {price:100}
@@ -27,15 +32,14 @@ export default function App() {
 
 
   return (
-    <main>
+    <main style={{border:"2px solid red",height:"100vh"}}>
       <Navbar cards={cards} orders={orders} setOrders={setOrders}  />  
-     <TextField  size="small" id="outlined-basic" label="Search" variant="outlined"  value={searchQ} placeholder="Search for item" onChange={(e)=>{
+     <SearchFilter searchQ={searchQ} setSearchQ={setSearchQ} pricesRange={pricesRange} setPricesRange={setPricesRange} />
+     <SearchFilter searchQ={searchQ} setSearchQ={setSearchQ} pricesRange={pricesRange} setPricesRange={setPricesRange} />
+     <SearchFilter searchQ={searchQ} setSearchQ={setSearchQ} pricesRange={pricesRange2} setPricesRange={setPricesRange2} />
+
       
-        setSearchQ(e.target.value)
-       
-     }}/>
- <PricesSlide pricesRange={pricesRange} setPricesRange={setPricesRange}/>
-       
+      
       
       {cards.filter(card=>{
         
