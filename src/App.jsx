@@ -4,8 +4,23 @@ import {useState,useEffect} from "react"
 import Button from "@mui/material/Button";
 import Navbar from "./Navbar.jsx"
 import SearchFilter from "./SearchFilter";
-
 import CardList from "./Cardlist";
+
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import Home from './pages/Home';
+import About from './pages/About';
+import Contact from './pages/Contact';
+
+/*
+npm install [name]
+
+npm install [extension]
+
+
+
+
+*/
+
 export default function App() {
 
   
@@ -30,6 +45,15 @@ export default function App() {
     })
   },[])
 
+  return (
+    <Router>
+      <Routes>
+      <Route path="/contact" element={<Contact />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </Router>
+  );
 
   return (
     <main style={{border:"2px solid red",height:"100vh"}}>
@@ -43,4 +67,9 @@ export default function App() {
      </div>
     </main>
   );
+
+
 }
+
+
+
