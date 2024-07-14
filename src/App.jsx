@@ -34,13 +34,13 @@ export default function App() {
   return (
     <main style={{border:"2px solid red",height:"100vh"}}>
     <Navbar cards={cards} orders={orders} setOrders={setOrders}  />  
-    <SearchFilter searchQ={searchQ} setSearchQ={setSearchQ} pricesRange={pricesRange} setPricesRange={setPricesRange} />
-    <CardList cards={cards} pricesRange={pricesRange}  searchQ={searchQ} orders={orders} setOrders={setOrders}/>
-  
+    
+    <div style={{display:"flex",border:"2px solid green",height:"100%"}}>
 
-
-
-       
+      <SearchFilter searchQ={searchQ} setSearchQ={setSearchQ} pricesRange={pricesRange} setPricesRange={setPricesRange} />
+      <CardList  cards={cards} pricesRange={pricesRange}  searchQ={searchQ} orders={orders} setOrders={setOrders}/>
+     
+     </div>
     </main>
   );
 }

@@ -3,7 +3,15 @@ import Card from "./CardComp"
 export default function CardList({cards,pricesRange,orders,setOrders,searchQ}) {
 
   return (
-    <div>
+    <div style={{border:"2px solid red",
+    width:"100%",
+    display:"flex",
+    flexDirection:"row",
+    flexWrap:"wrap",
+    alignItems:"flex-start",
+    justifyContent:"start",
+    columnGap:2
+    }}>
 
     {cards.filter(card=>{
         
@@ -17,6 +25,10 @@ export default function CardList({cards,pricesRange,orders,setOrders,searchQ}) {
      
      return <Card setOrders={setOrders} orders={orders} id={card.id} name={card.name} description={card.description} price={card.price} isAvailable={card.isAvailable=="true"}   />
     })}
+
+
+
+
     
     </div>
   )

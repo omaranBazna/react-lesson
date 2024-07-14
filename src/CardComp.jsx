@@ -15,6 +15,7 @@ import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 
 
 
+
 export default function CardComp({setOrders,orders,id, name, description, price, isAvailable }) {
 
   let isInCart = (orders.find(item=>item==id) != undefined)
@@ -65,8 +66,12 @@ export default function CardComp({setOrders,orders,id, name, description, price,
         }}  color="warning" variant="contained" size="small">
         Add
         </Button>}
+        
 
        
+
+
+
         {isAvailable && isInCart && <Button onClick={()=>{
            ///what will happen when we click the button
            setOrders((old_orders)=>{
@@ -74,8 +79,13 @@ export default function CardComp({setOrders,orders,id, name, description, price,
            })
 
         }}  color="info" variant="contained" size="small">
-        Remove from cart
+        Remove
         </Button>}
+
+       
+       
+       
+      
 
 
       </CardActions>
